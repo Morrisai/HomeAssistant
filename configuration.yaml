@@ -103,7 +103,7 @@ zone 2:
   latitude: !secret work_lat
   longitude: !secret work_long
   radius: 95
-  icon: mdi:work
+  icon: mdi:briefcase
 
 
 

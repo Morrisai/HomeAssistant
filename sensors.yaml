@@ -13,4 +13,8 @@
     - 30
     - 45
     
-- platform: yr      
+- platform: yr
+  monitored_conditions:
+    - temperature
+    - symbol
+    - precipitation
