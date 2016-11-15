@@ -1,0 +1,6 @@
+  kitchen:
+    name: Kitchen
+    view: yes
+    entities:
+      - script.timer_relock
+    

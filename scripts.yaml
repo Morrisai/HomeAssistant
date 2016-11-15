@@ -1,0 +1,10 @@
+timer_relock:
+    alias: "relock door after 5 minutes"
+    sequence:
+    - delay: 00:05:00
+    - service: lock.lock
+    
+unlock_door:
+    alias: "unlock door"
+    sequence:
+    - service: lock.unlock

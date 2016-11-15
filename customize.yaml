@@ -1,0 +1,33 @@
+  lock.schlage_be469nxcen_touchscreen_deadbolt_locked_2_0:
+    friendly_name: Front Door
+    icon: mdi:home
+
+  script.timer_relock:
+    hidden: true
+
+  script.unlock_door:
+    hidden: true  
+
+  sensor.schlage_be469nxcen_touchscreen_deadbolt_access_control_2_9:
+    hidden: true
+
+  sensor.schlage_be469nxcen_touchscreen_deadbolt_alarm_level_2_1:
+    hidden: true  
+
+  sensor.schlage_be469nxcen_touchscreen_deadbolt_burglar_2_10:
+    hidden: true
+
+  sensor.schlage_be469nxcen_touchscreen_deadbolt_power_management_2_11:
+    hidden: true
+
+  sensor.schlage_be469nxcen_touchscreen_deadbolt_sourcenodeid_2_2:
+    hidden: true 
+
+  sensor.schlage_be469nxcen_touchscreen_deadbolt_system_2_12:
+    hidden: true
+
+  sensor.schlage_be469nxcen_touchscreen_deadbolt_alarm_type_2_0:
+    hidden: true  
+
+  sensor.yr_symbol:
+    friendly_name:  _

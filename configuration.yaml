@@ -1,0 +1,114 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: 43.6924880
+  longitude: -79.4526300
+  # Impacts weather/sunrise data
+  elevation: 162.20
+  # C for Celsius, F for Fahrenheit
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/Toronto
+
+  customize: !include customize.yaml
+    
+     
+
+# Allows you to issue voice commands from the frontend
+conversation:
+
+# View all events in a logbook
+logbook:
+
+# Checks for available updates
+updater:
+
+# Discover some devices automatically
+#discovery:
+
+# Show links to resources in log and frontend
+#introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables support for tracking state changes over time.
+history:
+
+# Track the sun
+sun:
+
+automation: !include locks.yaml
+#group: !include groups.yaml
+
+
+
+
+# notify:
+#   platform: pushbullet
+#   # Optional name for the notify service
+#   name: AaronPush
+#   # api_key is a required config key by the pushbullet platform
+#   api_key: o.jpWhNbM0FUO2J6B2CTeDJb2HQDDSkeES
+
+http:
+  api_password: !secret http_password
+  ssl_certificate: !secret fullchain 
+  ssl_key: !secret privkey 
+
+zwave:
+  usb_path: /dev/ttyACM0
+  config_path: /srv/hass/hass_venv/lib/python3.4/site-packages/libopenzwave-0.3.1-py3.4-linux-armv6l.egg/config/
+  polling_interval: 30000
+  customize:
+    sensor.greenwave_powernode_6_port_energy_10:
+        polling_intensity: 1
+
+
+
+mqtt:
+  broker: 192.168.1.174
+  port: 8883
+  client_id: home-assistant-1
+  keepalive: 60
+  username: owntracks
+  password:  !secret mqtt_password
+
+
+device_tracker:
+- platform: asuswrt
+  host: 192.168.1.1 
+  protocol: telnet
+  mode: router
+  username: admin
+  password: !secret asuswrt_password
+  consider_home: 600
+- platform: owntracks
+  max_gps_accuracy: 20
+  waypoints: true
+  waypoint_whitelist: androids7
+  consider_home: 600
+
+
+zone:
+  name: Home
+  latitude: !secret home_lat
+  longitude: !secret home_long
+  radius: 18
+  icon: mdi:home
+
+zone 2:
+  name: Work
+  latitude: !secret work_lat
+  longitude: !secret work_long
+  radius: 95
+  icon: mdi:work
+
+
+
+script: !include scripts.yaml
+
+sensor: !include sensors.yaml
+
+

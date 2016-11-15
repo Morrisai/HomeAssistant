@@ -1,0 +1,56 @@
+- alias: Unlock Door when Aaron or Robyn comes home
+  trigger:
+    platform: state
+    entity_id: device_tracker.owntracks_androids7, device_tracker.android91483e59a00937ff
+    # Optional 
+    #state: 'xy'
+    # or (don't use that with condition: use_trigger_values)
+    from: 'not_home'
+    to: 'home'
+  condition: 
+  - condition: and
+    conditions:
+      - condition: time
+        before: '23:59'
+      - condition: time
+        after: '09:00'
+  action:
+    service: script.unlock_door
+
+
+- alias: Relock Door 5 minutes after opening 
+  trigger:
+    platform: state
+    entity_id: lock.schlage_be469nxcen_touchscreen_deadbolt_locked_2_0
+    # Optional 
+    # state: 'locked'
+    # or (don't use that with condition: use_trigger_values)
+    from: 'locked'
+    to: 'unlocked'
+  action:
+    service: script.timer_relock  
+
+
+       
+     
+
+
+
+
+
+
+
+
+# - alias: soft reset at 2:30am
+#   trigger:
+#     platform: time
+#     after: '2:30:00'
+#   action:
+#     service: zwave.soft_reset
+
+# - alias: heal at 2:31am
+#   trigger:
+#     platform: time
+#     after: '2:31:00'
+#   action:
+#     service: zwave.heal_network
