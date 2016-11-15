@@ -9,3 +9,11 @@
 **Upgrade HASS:** `cd ~/fabric-home-assistant && fab upgrade_homeassistant && sudo reboot`
 
 **Get Mosquitto Status:** `sudo systemctl status mosquitto`
+
+**Force Date update:** 
+```bash
+sudo service ntp stop 
+sudo ntpd -gq  
+sudo service ntp start
+```
+
