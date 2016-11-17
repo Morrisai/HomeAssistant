@@ -112,3 +112,9 @@ script: !include scripts.yaml
 sensor: !include sensors.yaml
 
 
+weather:
+  - platform: openweathermap
+    api_key: !secret openweathermap_key
+    latitude: !secret work_lat
+    longitude: !secret work_long
+

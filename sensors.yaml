@@ -12,9 +12,19 @@
     - 15
     - 30
     - 45
-    
-- platform: yr
+
+- platform: speedtest
+  minute:
+    - 7
+    - 22
+    - 37
+    - 52
   monitored_conditions:
-    - temperature
-    - symbol
-    - precipitation
+    - ping
+    - download
+    - upload
+
+    
+
+
+
