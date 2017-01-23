@@ -2,7 +2,7 @@
 
 ###Useful Commands:
 
-**Get Logs:** `tail -F /home/hass/.homeassistant/home-assistant.log`
+**Get Logs:** `tail -F /home/homeassistant/.homeassistant/home-assistant.log`
 
 **Restart HASS:** `sudo systemctl restart home-assistant.service`
 
