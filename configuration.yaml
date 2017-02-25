@@ -25,7 +25,7 @@ logbook:
 updater:
 
 # Discover some devices automatically
-#discovery:
+discovery:
 
 # Show links to resources in log and frontend
 #introduction:
@@ -38,43 +38,50 @@ history:
 
 # Track the sun
 sun:
-
-automation: !include locks.yaml
-#group: !include groups.yaml
-
-
-
-
-# notify:
-#   platform: pushbullet
-#   # Optional name for the notify service
-#   name: AaronPush
-#   # api_key is a required config key by the pushbullet platform
-#   api_key: o.jpWhNbM0FUO2J6B2CTeDJb2HQDDSkeES
-
+  
 http:
   api_password: !secret http_password
   ssl_certificate: !secret fullchain 
   ssl_key: !secret privkey 
 
+automation: !include locks.yaml
+
+ecobee:
+  api_key: !secret ecobee_api_key
+
+nest:
+  client_id: !secret nest_client_id
+  client_secret: !secret nest_client_secret
+
+weather:
+  - platform: openweathermap
+    api_key: !secret openweathermap_key
+    latitude: !secret work_lat
+    longitude: !secret work_long
+
+
 zwave:
   usb_path: /dev/ttyACM0
-  config_path: /srv/hass/hass_venv/lib/python3.4/site-packages/libopenzwave-0.3.1-py3.4-linux-armv6l.egg/config/
+  config_path: /srv/homeassistant/homeassistant_venv/lib/python3.4/site-packages/libopenzwave-0.3.1-py3.4-linux-armv7l.egg/config
   polling_interval: 30000
   customize:
     sensor.greenwave_powernode_6_port_energy_10:
         polling_intensity: 1
 
 
+# Text to speech
+tts:
+  platform: google
+
 
 mqtt:
-  broker: 192.168.1.174
-  port: 8883
+  broker: 127.0.0.1
+  port: 1883
   client_id: home-assistant-1
   keepalive: 60
-  username: owntracks
+  username: p25
   password:  !secret mqtt_password
-
+  
 
 device_tracker:
 - platform: asuswrt
@@ -85,7 +92,7 @@ device_tracker:
   password: !secret asuswrt_password
   consider_home: 600
 - platform: owntracks
-  max_gps_accuracy: 20
+  max_gps_accuracy: 200
   waypoints: true
   waypoint_whitelist: androids7
   consider_home: 600
@@ -102,7 +109,7 @@ zone 2:
   name: Work
   latitude: !secret work_lat
   longitude: !secret work_long
-  radius: 95
+  radius: 195
   icon: mdi:briefcase
 
 
@@ -111,10 +118,4 @@ script: !include scripts.yaml
 
 sensor: !include sensors.yaml
 
-
-weather:
-  - platform: openweathermap
-    api_key: !secret openweathermap_key
-    latitude: !secret work_lat
-    longitude: !secret work_long
 

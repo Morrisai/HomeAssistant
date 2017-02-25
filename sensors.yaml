@@ -1,28 +1,40 @@
 
-- platform: systemmonitor
-  resources:
-    - type: disk_use_percent
-      arg: /home
-    - type: memory_free
-    - type: processor_use
+- platform: template
+  sensors:
+    aaron_home:
+      friendly_name: 'Is Aaron home?'
+      value_template: '{% if states("device_tracker.pi_androids72") != "home" %}false{% else %}true{% endif %}'
+    robyn_home:
+      friendly_name: 'Is Robyn home?'
+      value_template: '{% if states("device_tracker.android91483e59a00937ff") != "home" %}false{% else %}true{% endif %}'  
 
-- platform: fastdotcom
-  minute:
-    - 0
-    - 15
-    - 30
-    - 45
 
-- platform: speedtest
-  minute:
-    - 7
-    - 22
-    - 37
-    - 52
-  monitored_conditions:
-    - ping
-    - download
-    - upload
+
+
+# - platform: systemmonitor
+#   resources:
+#     - type: disk_use_percent
+#       arg: /home
+#     - type: memory_free
+#     - type: processor_use
+
+# - platform: fastdotcom
+#   minute:
+#     - 0
+#     - 15
+#     - 30
+#     - 45
+
+# - platform: speedtest
+#   minute:
+#     - 7
+#     - 22
+#     - 37
+#     - 52
+#   monitored_conditions:
+#     - ping
+#     - download
+#     - upload
 
     
 

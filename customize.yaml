@@ -30,4 +30,36 @@
     hidden: true  
 
   sensor.yr_symbol:
-    friendly_name:  _
+    friendly_name:  
+
+
+  sensor.aaron_home:
+    hidden: true 
+
+  sensor.robyn_home:
+    hidden: true   
+
+
+  binary_sensor.living_room_camera_motion_detected:
+    hidden: true
+
+  binary_sensor.living_room_camera_online:
+    hidden: true
+
+  binary_sensor.living_room_camera_person_detected:
+    hidden: true
+
+  binary_sensor.living_room_camera_sound_detected:
+    hidden: true  
+
+  binary_sensor.apartment_occupancy:
+    hidden: true
+
+  binary_sensor.bedroom_occupancy:
+    hidden: true
+
+  binary_sensor.home_occupancy:
+    hidden: true  
+
+
+
