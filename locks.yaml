@@ -67,10 +67,10 @@
       before: sunrise  
     - condition: state
       entity_id: sensor.aaron_home
-      state: 'False'
+      state: 'false'
     - condition: state
       entity_id: sensor.robyn_home
-      state: 'False'  
+      state: 'false'  
   action:
     service: switch.turn_on
     entity_id: switch.out_door_lights_switch_3_0
