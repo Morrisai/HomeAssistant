@@ -1,7 +1,7 @@
 - alias: Unlock Door when Aaron or Robyn comes home
   trigger:
     platform: state
-    entity_id: device_tracker.pi_androids72, device_tracker.android91483e59a00937ff
+    entity_id: device_tracker.pi_androids72, device_tracker.android1c713e06860501c3
     # Optional 
     #state: 'xy'
     # or (don't use that with condition: use_trigger_values)
@@ -34,79 +34,86 @@
 
 
 
-- alias: Turn on outdoor lights if Aaron or Robyn leave after dark
+# - alias: Turn on outdoor lights if Aaron or Robyn leave after dark
+#   trigger:
+#     platform: state
+#     entity_id: device_tracker.pi_androids72, device_tracker.android1c713e06860501c3
+#     # Optional 
+#     #state: 'xy'
+#     # or (don't use that with condition: use_trigger_values)
+#     from: 'home'
+#     to: 'not_home'
+#   condition: 
+#   - condition: or
+#     conditions:  
+#     - condition: sun
+#       after: sunset
+#     - condition: sun
+#       before: sunrise  
+#   action:
+#     service: switch.turn_on
+#     entity_id: switch.out_door_lights_switch_3_0
+
+# - alias: Turn on outdoor lights if Aaron or Robyn are not home when the sun sets
+#   trigger:
+#     platform: sun
+#     event: sunset
+#   condition: 
+#   - condition: or
+#     conditions:
+#     - condition: sun
+#       after: sunset
+#     - condition: sun
+#       before: sunrise  
+#     - condition: state
+#       entity_id: sensor.aaron_home
+#       state: 'false'
+#     - condition: state
+#       entity_id: sensor.robyn_home
+#       state: 'false'  
+#   action:
+#     service: switch.turn_on
+#     entity_id: switch.out_door_lights_switch_3_0
+
+# - alias: Turn off outdoor lights when the sun rises
+#   trigger:
+#     platform: sun
+#     event: sunrise
+#   action:
+#     service: switch.turn_off
+#     entity_id: switch.out_door_lights_switch_3_0    
+
+# - alias: Turn off outdoor lights if Aaron or Robyn are both home
+#   trigger:
+#     platform: state
+#     entity_id: device_tracker.pi_androids72, device_tracker.android1c713e06860501c3
+#     # Optional 
+#     #state: 'xy'
+#     # or (don't use that with condition: use_trigger_values)
+#     from: 'not_home'
+#     to: 'home' 
+#   condition:  
+#   - condition: and
+#     conditions:
+#     - condition: state
+#       entity_id: device_tracker.pi_androids72 
+#       state: 'home'
+#     - condition: state
+#       entity_id: device_tracker.android1c713e06860501c3
+#       state: 'home'      
+#   action:
+#     service: switch.turn_off
+#     entity_id: switch.out_door_lights_switch_3_0   
+
+
+  
+- alias: 'Auto Renew SSL Cert'
   trigger:
-    platform: state
-    entity_id: device_tracker.pi_androids72, device_tracker.android91483e59a00937ff
-    # Optional 
-    #state: 'xy'
-    # or (don't use that with condition: use_trigger_values)
-    from: 'home'
-    to: 'not_home'
-  condition: 
-  - condition: or
-    conditions:  
-    - condition: sun
-      after: sunset
-    - condition: sun
-      before: sunrise  
+    platform: numeric_state
+    entity_id: sensor.ssl_cert_expiry
+    below: 29
   action:
-    service: switch.turn_on
-    entity_id: switch.out_door_lights_switch_3_0
-
-- alias: Turn on outdoor lights if Aaron or Robyn are not home when the sun sets
-  trigger:
-    platform: sun
-    event: sunset
-  condition: 
-  - condition: or
-    conditions:
-    - condition: sun
-      after: sunset
-    - condition: sun
-      before: sunrise  
-    - condition: state
-      entity_id: sensor.aaron_home
-      state: 'false'
-    - condition: state
-      entity_id: sensor.robyn_home
-      state: 'false'  
-  action:
-    service: switch.turn_on
-    entity_id: switch.out_door_lights_switch_3_0
-
-- alias: Turn off outdoor lights when the sun rises
-  trigger:
-    platform: sun
-    event: sunrise
-  action:
-    service: switch.turn_off
-    entity_id: switch.out_door_lights_switch_3_0    
-
-- alias: Turn off outdoor lights if Aaron or Robyn are both home
-  trigger:
-    platform: state
-    entity_id: device_tracker.pi_androids72, device_tracker.android91483e59a00937ff
-    # Optional 
-    #state: 'xy'
-    # or (don't use that with condition: use_trigger_values)
-    from: 'not_home'
-    to: 'home' 
-  condition:  
-  - condition: and
-    conditions:
-    - condition: state
-      entity_id: device_tracker.pi_androids72 
-      state: 'home'
-    - condition: state
-      entity_id: device_tracker.android91483e59a00937ff
-      state: 'home'      
-  action:
-    service: switch.turn_off
-    entity_id: switch.out_door_lights_switch_3_0   
-
-
-
+    service: shell_command.renew_ssl
 
 
 

@@ -1,65 +1,63 @@
-  lock.schlage_be469nxcen_touchscreen_deadbolt_locked_2_0:
+  lock.schlage_be469nxcen_touchscreen_deadbolt_locked:
     friendly_name: Front Door
     icon: mdi:home
-
+    google_assistant: true
+    google_assistant_name: front door
   script.timer_relock:
     hidden: true
-
   script.unlock_door:
-    hidden: true  
-
-  sensor.schlage_be469nxcen_touchscreen_deadbolt_access_control_2_9:
-    hidden: true
-
-  sensor.schlage_be469nxcen_touchscreen_deadbolt_alarm_level_2_1:
-    hidden: true  
-
-  sensor.schlage_be469nxcen_touchscreen_deadbolt_burglar_2_10:
-    hidden: true
-
-  sensor.schlage_be469nxcen_touchscreen_deadbolt_power_management_2_11:
-    hidden: true
-
-  sensor.schlage_be469nxcen_touchscreen_deadbolt_sourcenodeid_2_2:
     hidden: true 
-
-  sensor.schlage_be469nxcen_touchscreen_deadbolt_system_2_12:
+  script.turn_off_lights:
+    hidden: true   
+  sensor.schlage_be469nxcen_touchscreen_deadbolt_access_control:
     hidden: true
-
-  sensor.schlage_be469nxcen_touchscreen_deadbolt_alarm_type_2_0:
-    hidden: true  
-
+  sensor.schlage_be469nxcen_touchscreen_deadbolt_alarm_level:
+    hidden: true 
+  sensor.schlage_be469nxcen_touchscreen_deadbolt_burglar:
+    hidden: true
+  sensor.schlage_be469nxcen_touchscreen_deadbolt_power_management:
+    hidden: true
+  sensor.schlage_be469nxcen_touchscreen_deadbolt_sourcenodeid:
+    hidden: true 
+  sensor.schlage_be469nxcen_touchscreen_deadbolt_system:
+    hidden: true
+  sensor.schlage_be469nxcen_touchscreen_deadbolt_alarm_type:
+    hidden: true
+  switch.schlage_be469nxcen_touchscreen_deadbolt_switch:
+    hidden: true    
   sensor.yr_symbol:
-    friendly_name:  
-
-
+    friendly_name: 
   sensor.aaron_home:
     hidden: true 
-
   sensor.robyn_home:
-    hidden: true   
-
-
+    hidden: true  
   binary_sensor.living_room_camera_motion_detected:
     hidden: true
-
   binary_sensor.living_room_camera_online:
     hidden: true
-
   binary_sensor.living_room_camera_person_detected:
     hidden: true
-
   binary_sensor.living_room_camera_sound_detected:
-    hidden: true  
-
+    hidden: true
   binary_sensor.apartment_occupancy:
     hidden: true
-
   binary_sensor.bedroom_occupancy:
     hidden: true
-
   binary_sensor.home_occupancy:
     hidden: true  
+  sensor.home_humidity:
+    hidden: true  
+  sensor.home_temperature:
+    hidden: true
+  sensor.apartment_temperature:
+    hidden: true
+  sensor.bedroom_temperature:
+    hidden: true  
+  cover.garage_door_opener:
+    google_assistant: true
+    google_assistant_name: garage door
+
+
 
 
 

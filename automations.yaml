@@ -1,0 +1,147 @@
+- id: auto1
+  alias: Unlock Door when Aaron or Robyn comes home
+  trigger:
+    platform: state
+    entity_id: device_tracker.pi_androids72, device_tracker.android1c713e06860501c3
+    # Optional 
+    #state: 'xy'
+    # or (don't use that with condition: use_trigger_values)
+    from: 'not_home'
+    to: 'home'
+  condition: 
+  - condition: and
+    conditions:
+      - condition: time
+        before: '23:59'
+      - condition: time
+        after: '09:00'
+  action:
+    service: script.unlock_door
+
+- id: auto2
+  alias: Relock Door 5 minutes after opening 
+  trigger:
+    platform: state
+    entity_id: lock.schlage_be469nxcen_touchscreen_deadbolt_locked
+    # Optional 
+    # state: 'locked'
+    # or (don't use that with condition: use_trigger_values)
+    from: 'locked'
+    to: 'unlocked'
+  action:
+    service: script.timer_relock  
+
+- id: auto3
+  alias: 'Auto Renew SSL Cert'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.ssl_cert_expiry
+    below: 29
+  action:
+    service: shell_command.renew_ssl
+
+- id: auto4
+  alias: Clear door lock timer
+  trigger:
+    platform: state
+    entity_id: lock.schlage_be469nxcen_touchscreen_deadbolt_locked
+    from: 'unlocked'
+    to: 'locked'
+  action:
+   -  service: script.turn_off
+      entity_id: script.timer_relock
+
+- id: auto5
+  alias: Turn on outdoor lights if Aaron or Robyn leave after dark
+  trigger:
+    platform: state
+    entity_id: device_tracker.pi_androids72, device_tracker.android1c713e06860501c3
+    # Optional 
+    #state: 'xy'
+    # or (don't use that with condition: use_trigger_values)
+    from: 'home'
+    to: 'not_home'
+  condition: 
+  - condition: or
+    conditions:  
+    - condition: sun
+      after: sunset
+    - condition: sun
+      before: sunrise  
+  action:
+    service: light.turn_on
+    entity_id: light.outside_lights
+
+- id: auto6
+  alias: Turn on outdoor lights if Aaron or Robyn are not home when the sun sets
+  trigger:
+    platform: sun
+    event: sunset
+  condition: 
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: sensor.aaron_home
+      state: 'false'
+    - condition: state
+      entity_id: sensor.robyn_home
+      state: 'false'  
+  action:
+    service: light.turn_on
+    entity_id: light.outside_lights
+
+- id: auto7
+  alias: Turn off outdoor lights when the sun rises
+  trigger:
+    platform: sun
+    event: sunrise
+  action:
+    service: light.turn_off
+    entity_id: light.outside_lights    
+
+- id: auto8
+  alias: Turn off outdoor lights if Aaron or Robyn are both home
+  trigger:
+    platform: state
+    entity_id: device_tracker.pi_androids72, device_tracker.android1c713e06860501c3
+    # Optional 
+    #state: 'xy'
+    # or (don't use that with condition: use_trigger_values)
+    from: 'not_home'
+    to: 'home' 
+  condition:  
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: device_tracker.pi_androids72 
+      state: 'home'
+    - condition: state
+      entity_id: device_tracker.android1c713e06860501c3
+      state: 'home'      
+  action:
+     service: script.turn_off_lights
+
+- id: auto9
+  alias: Turn off outdoor lights if Aaron or Robyn are home and the door relocks
+  trigger:
+    platform: state
+    entity_id: lock.schlage_be469nxcen_touchscreen_deadbolt_locked
+    from: 'unlocked'
+    to: 'locked'
+  condition: 
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: sensor.aaron_home
+      state: 'true'
+    - condition: state
+      entity_id: sensor.robyn_home
+      state: 'true'  
+  action:
+    service: light.turn_off
+    entity_id: light.outside_lights    
+
+
+
+
+

@@ -12,7 +12,7 @@ homeassistant:
   time_zone: America/Toronto
 
   customize: !include customize.yaml
-    
+
      
 
 # Allows you to issue voice commands from the frontend
@@ -38,20 +38,42 @@ history:
 
 # Track the sun
 sun:
+
+logger:
+  default: critical
+#   logs:    
+#     homeassistant.components.lock.zwave: info
+   
+
+config:  
+
+group: !include groups.yaml
+
   
 http:
   api_password: !secret http_password
   ssl_certificate: !secret fullchain 
   ssl_key: !secret privkey 
 
-automation: !include locks.yaml
+automation: !include automations.yaml
+#automation old: !include locks.yaml
 
-ecobee:
-  api_key: !secret ecobee_api_key
+# ecobee:
+#   api_key: !secret ecobee_api_key
 
-nest:
-  client_id: !secret nest_client_id
-  client_secret: !secret nest_client_secret
+lutron_caseta:
+  host: 192.168.1.22
+
+
+#nest:
+#  client_id: !secret nest_client_id
+#  client_secret: !secret nest_client_secret
+
+cover:
+  - platform: myq
+    username: !secret cover_myd_username 
+    password: !secret cover_myd_password
+    type: chamberlain  
 
 weather:
   - platform: openweathermap
@@ -61,12 +83,14 @@ weather:
 
 
 zwave:
+  device_config: !include zwave_device_config.yaml
   usb_path: /dev/ttyACM0
   config_path: /srv/homeassistant/homeassistant_venv/lib/python3.4/site-packages/libopenzwave-0.3.1-py3.4-linux-armv7l.egg/config
   polling_interval: 30000
-  customize:
-    sensor.greenwave_powernode_6_port_energy_10:
-        polling_intensity: 1
+  new_entity_ids: true
+  # customize:
+  #   sensor.greenwave_powernode_6_port_energy_10:
+  #       polling_intensity: 1
 
 
 # Text to speech
@@ -102,14 +126,14 @@ zone:
   name: Home
   latitude: !secret home_lat
   longitude: !secret home_long
-  radius: 18
+  radius: 35
   icon: mdi:home
 
 zone 2:
   name: Work
   latitude: !secret work_lat
   longitude: !secret work_long
-  radius: 195
+  radius: 100
   icon: mdi:briefcase
 
 
@@ -119,3 +143,16 @@ script: !include scripts.yaml
 sensor: !include sensors.yaml
 
 
+
+shell_command: 
+  renew_ssl: ~/certbot/certbot-auto renew --quiet --no-self-upgrade --standalone --preferred-challenges http-01 && sudo reboot
+
+google_assistant:
+  project_id: homeassistant-142504
+  client_id: uxPIFIPFeXMcAhymh1XjrH8aTHFCKOM4LmYH2RkBAN5q8YQVJaVCejzPzuThgy5HmpJVnzsIJcIAeUdg
+  access_token: MLR95N7KXUv3yZW3fJkpKFlv8WRhzqGljuOv3m3uvu4JVjYws3o1A3CDWeElFe4av4CfZGXrL3OUDKlg
+  # exposed_domains:
+  #   - switch
+  #   - light
+  #   - group
+  #   - cover
