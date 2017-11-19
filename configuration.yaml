@@ -63,6 +63,9 @@ automation: !include automations.yaml
 
 lutron_caseta:
   host: 192.168.1.22
+  keyfile: caseta.key
+  certfile: caseta.crt
+  ca_certs: caseta-bridge.crt
 
 
 #nest:
