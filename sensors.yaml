@@ -12,20 +12,6 @@
 - platform: cert_expiry
   host: ennerdale.duckdns.org
 
-# - platform: systemmonitor
-#   resources:
-#     - type: disk_use_percent
-#       arg: /home
-#     - type: memory_free
-#     - type: processor_use
-
-# - platform: fastdotcom
-#   minute:
-#     - 0
-#     - 15
-#     - 30
-#     - 45
-
 - platform: speedtest
   minute:
     - 7
@@ -36,7 +22,3 @@
     - ping
     - download
 
-
-- platform: time_date
-  display_options:
-    - 'date_time'
